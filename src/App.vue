@@ -1,28 +1,43 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Menu></Menu>
+    <Map></Map>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Map from "@/components/Map.vue";
+import Menu from "@/components/menu.vue";
+const { ipcRenderer } = require("electron");
 export default {
-  name: 'App',
+  name: "App",
+  data(){
+    return{
+    }
+  },
   components: {
-    HelloWorld
+    Map,
+    Menu
+  },
+  created(){
+    console.log(ipcRenderer);
+    ipcRenderer.on("response",(event,str)=>{
+      console.log(event);
+      console.log(str);
+      this.msg=str
+    })
+  },
+  methods:{
+    getdata(){
+      this.msg=ipcRenderer.sendSync("syn")
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+*{
+  margin: 0;
+  padding: 0;
 }
 </style>

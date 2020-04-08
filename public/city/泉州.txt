@@ -1,0 +1,1 @@
+{"cityName":"泉州","locationId":350500,"location":"118.586980,24.907550"}

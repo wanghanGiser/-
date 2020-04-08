@@ -1,0 +1,1 @@
+{"cityName":"天水","locationId":620500,"location":"105.724934,34.580978"}

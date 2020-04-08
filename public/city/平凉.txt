@@ -1,0 +1,1 @@
+{"cityName":"平凉","locationId":620800,"location":"106.669905,35.541077"}

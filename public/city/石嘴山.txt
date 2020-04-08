@@ -1,0 +1,1 @@
+{"cityName":"石嘴山","locationId":640200,"location":"106.376345,39.013791"}

@@ -1,0 +1,1 @@
+{"cityName":"金昌","locationId":620300,"location":"102.188268,38.520099"}

@@ -1,0 +1,1 @@
+{"cityName":"漳州","locationId":350600,"location":"117.645970,24.513748"}

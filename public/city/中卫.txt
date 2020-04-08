@@ -1,0 +1,1 @@
+{"cityName":"中卫","locationId":640500,"location":"105.190906,37.514635"}

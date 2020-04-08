@@ -1,0 +1,1 @@
+{"cityName":"六盘水","locationId":520200,"location":"104.830508,26.592496"}

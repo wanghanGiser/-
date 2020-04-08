@@ -1,0 +1,1 @@
+{"cityName":"甘孜州","locationId":513300,"location":"101.962271,30.049623"}

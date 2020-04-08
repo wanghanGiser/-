@@ -1,0 +1,1 @@
+{"cityName":"曲靖","locationId":530300,"location":"103.795969,25.490519"}

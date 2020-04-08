@@ -1,0 +1,1 @@
+{"cityName":"资阳","locationId":512000,"location":"104.635216,30.128525"}

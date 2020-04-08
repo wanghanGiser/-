@@ -1,0 +1,1 @@
+{"cityName":"锦州","locationId":210700,"location":"121.127190,41.095131"}

@@ -1,0 +1,1 @@
+{"cityName":"龙岩","locationId":350800,"location":"117.033794,25.102944"}

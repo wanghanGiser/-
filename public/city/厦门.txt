@@ -1,0 +1,1 @@
+{"cityName":"厦门","locationId":350200,"location":"118.090010,24.479571"}
