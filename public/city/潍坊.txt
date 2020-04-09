@@ -1,1 +1,1 @@
-{"cityName":"潍坊","locationId":370700,"location":null}
+{"cityName":"潍坊","locationId":370700,"location":"119.15,36.70"}

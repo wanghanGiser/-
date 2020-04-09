@@ -31,6 +31,13 @@ ipcMain.on("getdata", (event, flag) => {
         event.sender.send("data", fs.readFileSync(filepath, {
           encoding: 'UTF-8'
         }), fn);
+      } else {
+        filepath = path.join(global.__static, "/data/" + fn + ".json");
+        if (fs.existsSync(filepath)) {
+          event.sender.send("data", fs.readFileSync(filepath, {
+            encoding: 'UTF-8'
+          }), fn);
+        }
       }
       start += od
     } else {

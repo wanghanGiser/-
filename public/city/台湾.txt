@@ -1,1 +1,1 @@
-{"cityName":"台湾","locationId":710000,"location":null}
+{"cityName":"台湾","locationId":710000,"location":"121.50,25.05"}

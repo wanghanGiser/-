@@ -84,6 +84,16 @@ app.on('activate', () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
+
+  if (!isDevelopment) {
+    global.__static = require('path').join(
+        process.env['APPDATA'], "/"+app.getName()
+      )
+      .replace(/\\/g, '\\\\')
+  } else {
+    global.__static = __static
+  }
+  // console.log(app.getName());
   getData();
   const {
     Menu
