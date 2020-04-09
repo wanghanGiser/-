@@ -12,6 +12,7 @@ import {
 import Point from 'ol/geom/Point';
 import Heatmap from "ol/layer/Heatmap"
 import VectorSource from 'ol/source/Vector';
+import OverLay from "ol/Overlay"
 
 let map = new Map({
   layers: [
@@ -73,9 +74,15 @@ function getFeatures(points,num) {
   })
   return features
 }
+function getOverLay(){
+  return new OverLay({
+    
+  });
+}
 export {
   map,
   getHeatMap,
   getSource,
-  getFeatures
+  getFeatures,
+  getOverLay
 }
