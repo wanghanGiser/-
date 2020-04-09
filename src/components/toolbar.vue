@@ -1,14 +1,12 @@
 <template>
   <div id="toolbar">
     <div id="heatmap">
-      <label>
-        <input type="checkbox" style="display:none" v-model="ischecked1" />
-        ds
-      </label>
+      <input id="qwe" type="checkbox" style="display:none" v-model="ischecked1" />
+      <label for="qwe">{{confirm}}</label>
       <div v-show="ischecked1">
         <ul>
           <li>
-            <input type="range" v-model="range" max="300" />
+            <input type="range" v-model="range" max="10000" />
             {{range}}
           </li>
           <li @click="cirm()">确认</li>
@@ -29,13 +27,14 @@ export default {
     return {
       range: 10,
       ischecked1: false,
-      image: start
+      image: start,
+      confirm: 10
     };
   },
   methods: {
     cirm() {
-      console.log(this.$store.rangeCount);
-      this.$store.rangeCount = this.range;
+      this.confirm = this.range;
+      this.$store.rangeCount = this.confirm;
     },
     onoff() {
       let flag = this.image == start;
@@ -56,14 +55,18 @@ export default {
 #toolbar {
   display: flex;
   height: 100%;
+  color: #f1f2f6;
 }
 #toolbar > div {
   user-select: none;
   -webkit-app-region: no-drag;
-  width: 2em;
   height: 100%;
+  width: 2em;
 }
-#toolbar > div:hover {
+#toolbar > div:first-child{
+  width: 3.5em;
+}
+#toolbar > div:nth-child(n + 2):hover {
   background-color: #747d8c;
 }
 #heatmap > div {
@@ -77,11 +80,27 @@ export default {
   line-height: 2em;
   text-align: center;
 }
+#qwe + label:hover {
+  background-color: #747d8c;
+}
+#qwe:checked + label {
+  background-color: #747d8c;
+}
 #heatmap > div > ul {
-  background-color: rgb(219, 206, 206);
+  background-color: #2f3542;
   position: absolute;
   top: 0;
   z-index: 20;
+}
+#heatmap > div > ul > li {
+  text-align: center;
+  padding: 5px;
+}
+#heatmap > div > ul > li:first-child{
+  border-bottom: 1px solid #ccc;
+}
+#heatmap > div > ul > li:last-child:hover{
+  background-color: #57606f;
 }
 #onoff > label {
   display: block;
@@ -90,5 +109,20 @@ export default {
   background-position: center;
   background-size: 60% 60%;
   background-repeat: no-repeat;
+}
+input[type="range"] {
+  -webkit-appearance: none;
+  outline: none;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #747d8c;
+}
+input[type="range"]::-webkit-slider-thumb {
+  cursor: pointer;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: azure;
 }
 </style>
