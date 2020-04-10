@@ -14,7 +14,8 @@ module.exports = function getData() {
   }
   let reqs = [];
   while (start <= now) {
-    if (!fs.existsSync(path + (new Date(start)).toISOString().substr(0, 10) + ".json")) {
+    let filename=(new Date(start)).toISOString().substr(0, 10) + ".json";
+    if ((!fs.existsSync(path + filename))&&(!fs.existsSync(output+filename))) {
       reqs.push({
         handle: axios.get(url + (new Date(start)).toISOString().substr(0, 10)),
         path: output + (new Date(start)).toISOString().substr(0, 10) + ".json"
