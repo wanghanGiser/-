@@ -49,3 +49,4 @@ ipcMain.on("getdata", (event, flag) => {
 ipcMain.on("close", () => {
   app.quit();
 })
+module.exports=interval

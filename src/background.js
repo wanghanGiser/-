@@ -3,13 +3,14 @@ import {
   app,
   protocol,
   BrowserWindow,
-  ipcMain
+  ipcMain,
+  Menu
 } from 'electron'
 import {
   createProtocol,
   /* installVueDevtools */
 } from 'vue-cli-plugin-electron-builder/lib'
-
+let interval;
 const getData = require("./getData.js")
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -59,6 +60,9 @@ function createWindow() {
     win.webContents.send('main-window-unmax');
   })
   win.on('closed', () => {
+    if (interval) {
+      clearInterval(interval)
+    }
     win = null
   })
 }
@@ -87,7 +91,7 @@ app.on('ready', async () => {
 
   if (!isDevelopment) {
     global.__static = require('path').join(
-        process.env['APPDATA'], "/"+app.getName()
+        process.env['APPDATA'], "/" + app.getName()
       )
       .replace(/\\/g, '\\\\')
   } else {
@@ -95,9 +99,6 @@ app.on('ready', async () => {
   }
   // console.log(app.getName());
   getData();
-  const {
-    Menu
-  } = require('electron');
   Menu.setApplicationMenu(null);
   if (isDevelopment && !process.env.IS_TEST) {
 
@@ -116,8 +117,7 @@ app.on('ready', async () => {
   }
 
   createWindow()
-  require("./ipc.js");
-
+  interval = require("./ipc.js");
 })
 ipcMain.on("tomax", () => {
   if (win.isMaximized()) {
