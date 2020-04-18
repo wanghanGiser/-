@@ -26,7 +26,10 @@ module.exports = function getData() {
   for (let i = 0; i < reqs.length; i++) {
     reqs[i].handle.then(res => {
       if (res.data.code == 200) {
-        fs.writeFileSync(reqs[i].path, JSON.stringify(add(res.data.newslist)));
+        add(res.data.newslist).then(res=>{
+          fs.writeFileSync(reqs[i].path, JSON.stringify(res));
+        })
+        
       }
     })
   }

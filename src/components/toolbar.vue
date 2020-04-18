@@ -16,6 +16,8 @@
     <div id="onoff" @click="onoff()">
       <label :style="{backgroundImage:image}"></label>
     </div>
+    <div>+</div>
+    <div>-</div>
   </div>
 </template>
 <script>
@@ -47,11 +49,11 @@ export default {
       this.image = start;
       event.sender.send("getdata", false);
     });
-    document.body.onkeyup=(e)=>{
-      if(e && e.keyCode == 13){
+    document.body.onkeyup = e => {
+      if (e && e.keyCode == 13) {
         this.onoff();
       }
-    }
+    };
   }
 };
 </script>
@@ -68,7 +70,7 @@ export default {
   height: 100%;
   width: 2em;
 }
-#toolbar > div:first-child{
+#toolbar > div:first-child {
   width: 3.5em;
 }
 #toolbar > div:nth-child(n + 2):hover {
@@ -101,10 +103,10 @@ export default {
   text-align: center;
   padding: 5px;
 }
-#heatmap > div > ul > li:first-child{
+#heatmap > div > ul > li:first-child {
   border-bottom: 1px solid #ccc;
 }
-#heatmap > div > ul > li:last-child:hover{
+#heatmap > div > ul > li:last-child:hover {
   background-color: #57606f;
 }
 #onoff > label {

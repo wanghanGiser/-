@@ -1,7 +1,7 @@
-import {
+const {
   ipcMain,
   app
-} from "electron";
+} = require('electron')
 
 const fs = require("fs");
 const path = require("path");
@@ -49,4 +49,4 @@ ipcMain.on("getdata", (event, flag) => {
 ipcMain.on("close", () => {
   app.quit();
 })
-module.exports=interval
+module.exports = interval

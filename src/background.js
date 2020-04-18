@@ -1,15 +1,15 @@
 'use strict'
-import {
+const {
   app,
   protocol,
   BrowserWindow,
   ipcMain,
   Menu
-} from 'electron'
-import {
+}=require('electron')
+const {
   createProtocol,
   /* installVueDevtools */
-} from 'vue-cli-plugin-electron-builder/lib'
+}=require('vue-cli-plugin-electron-builder/lib');
 let interval;
 const getData = require("./getData.js")
 const isDevelopment = process.env.NODE_ENV !== 'production'

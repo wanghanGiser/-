@@ -1,30 +1,55 @@
 const fs = require('fs');
+const getCity = require('./getcity')
 
-// let start = (new Date("2020-02-12")).getTime();
-// let now = new Date((new Date()).toISOString().substr(0, 10)).getTime();
-// const od = 24 * 60 * 60 * 1000;
-
-// while (start <= now) {
-//   let file = (new Date(start)).toISOString().substr(0, 10);
-//   add(file);
-//   start += od;
-// }
-
-module.exports= function add(filename) {
+module.exports = async (filename) => {
   let jsonstr = filename;
   const reg = /.+(省|自治区)/
-  jsonstr.forEach(i => {
+  for (let x = 0; x < jsonstr.length; x++) {
+    let i = jsonstr[x];
     if (reg.test(i.provinceName)) {
-      i.cities.forEach(j => {
-        if ((j.cityName != "未明确地区")&&(j.cityName!="监狱系统")) {
-          let location = JSON.parse(fs.readFileSync(__static + "/city/" + j.cityName + ".txt")).location;
-          j.location = location;
+      for (let y = 0; y < i.cities.length; y++) {
+        let j = i.cities[y];
+        if ((j.cityName != "未明确地区") && (j.cityName != "监狱系统")) {
+          let city = __static + "/city/" + j.cityName + ".txt";
+          if (fs.existsSync(city)) {
+            let location = JSON.parse(fs.readFileSync(city)).location;
+            j.location = location;
+          } else {
+            city = global.__static + "/city/" + j.cityName + ".txt";
+            if (fs.existsSync(city)) {
+              let location = JSON.parse(fs.readFileSync(city)).location;
+              j.location = location;
+            } else {
+              let res = await getCity(j.cityName);
+              if (res) {
+                let location = JSON.parse(fs.readFileSync(city)).location;
+                j.location = location;
+              }
+            }
+
+          }
         }
-      })
+      }
     } else {
-      let location = JSON.parse(fs.readFileSync(__static + "/city/" + i.provinceName + ".txt")).location;
-      i.location = location;
+      let city = __static + "/city/" + i.provinceName + ".txt";
+      if (fs.existsSync(city)) {
+        let location = JSON.parse(fs.readFileSync(city)).location;
+        i.location = location;
+      } else {
+        city = global.__static + "/city/" + i.provinceName + ".txt";
+        if (fs.existsSync(city)) {
+          let location = JSON.parse(fs.readFileSync(city)).location;
+          i.location = location;
+        } else {
+          let res = await getCity(i.provinceName);
+          if (res) {
+
+            let location = JSON.parse(fs.readFileSync(city)).location;
+            i.location = location;
+          }
+        }
+      }
     }
-  });
+  }
   return jsonstr
 }
