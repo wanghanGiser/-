@@ -5,13 +5,12 @@ const {
 
 const fs = require("fs");
 const path = require("path");
+const od = 24 * 60 * 60 * 1000;
 let interval;
 ipcMain.on("getdata", (event, flag) => {
   if (interval) clearInterval(interval);
   let start = (new Date("2020-02-13")).getTime();
   let end = new Date((new Date()).toISOString().substr(0, 10)).getTime();
-  const od = 24 * 60 * 60 * 1000;
-
   if (!flag) {
     let fn = (new Date(start)).toISOString().substr(0, 10);
     let filepath = path.join(__static, "/data/" + fn + ".json");
@@ -48,5 +47,38 @@ ipcMain.on("getdata", (event, flag) => {
 })
 ipcMain.on("close", () => {
   app.quit();
+})
+let current = (new Date("2020-02-13")).getTime();
+const start = (new Date("2020-02-13")).getTime();
+const end = (new Date(((new Date()).toISOString().substr(0, 10)))).getTime();
+ipcMain.on('change', (event, flag) => {
+  if (interval) clearInterval(interval);
+
+  if (flag) {
+    if (current >= end) {
+      return;
+    }
+    current += od;
+  } else {
+    if (current <= start) {
+
+      return;
+    }
+    current -= od;
+  }
+  let fn = (new Date(current)).toISOString().substr(0, 10);
+  let filepath = path.join(__static, "/data/" + fn + ".json");
+  if (fs.existsSync(filepath)) {
+    event.sender.send("data", fs.readFileSync(filepath, {
+      encoding: 'UTF-8'
+    }), fn);
+  } else {
+    filepath = path.join(global.__static, "/data/" + fn + ".json");
+    if (fs.existsSync(filepath)) {
+      event.sender.send("data", fs.readFileSync(filepath, {
+        encoding: 'UTF-8'
+      }), fn);
+    }
+  }
 })
 module.exports = interval

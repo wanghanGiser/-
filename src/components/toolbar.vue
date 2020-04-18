@@ -13,11 +13,11 @@
         </ul>
       </div>
     </div>
-    <div id="onoff" @click="onoff()">
+    <div id="onoff" @click="onoff()" title="快捷键 空格space">
       <label :style="{backgroundImage:image}"></label>
     </div>
-    <div>+</div>
-    <div>-</div>
+    <div @click="changeDate(1)" title="快捷键 +">➕</div>
+    <div @click="changeDate(-1)" title="快捷键 -">➖</div>
   </div>
 </template>
 <script>
@@ -42,6 +42,9 @@ export default {
       let flag = this.image == start;
       ipcRenderer.send("getdata", flag);
       this.image = flag ? pause : start;
+    },
+    changeDate(a) {
+      ipcRenderer.send("change", a > 0);
     }
   },
   mounted() {
@@ -50,8 +53,14 @@ export default {
       event.sender.send("getdata", false);
     });
     document.body.onkeyup = e => {
-      if (e && e.keyCode == 13) {
+      if (e && e.keyCode == 32) {
         this.onoff();
+      }
+      if (e && e.keyCode == 187) {
+        this.changeDate(true);
+      }
+      if (e && e.keyCode == 189) {
+        this.changeDate(false);
       }
     };
   }
@@ -69,6 +78,11 @@ export default {
   -webkit-app-region: no-drag;
   height: 100%;
   width: 2em;
+}
+#toolbar > div:nth-of-type(n+2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #toolbar > div:first-child {
   width: 3.5em;
