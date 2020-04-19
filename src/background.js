@@ -5,11 +5,11 @@ const {
   BrowserWindow,
   ipcMain,
   Menu
-}=require('electron')
+} = require('electron')
 const {
   createProtocol,
   /* installVueDevtools */
-}=require('vue-cli-plugin-electron-builder/lib');
+} = require('vue-cli-plugin-electron-builder/lib');
 let interval;
 const getData = require("./getData.js")
 const isDevelopment = process.env.NODE_ENV !== 'production'

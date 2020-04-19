@@ -26,9 +26,9 @@ export default {
     };
   },
   mounted() {
+    ipcRenderer.send('first');
     map.setTarget("map");
     let overlay = getOverLay();
-    console.log(overlay);
     overlay.setElement(document.getElementById("popup"));
     overlay.setMap(map);
     ipcRenderer.on("data", (event, data, date) => {

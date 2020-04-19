@@ -18,6 +18,7 @@
     </div>
     <div @click="changeDate(1)" title="快捷键 +">➕</div>
     <div @click="changeDate(-1)" title="快捷键 -">➖</div>
+   
   </div>
 </template>
 <script>
@@ -52,7 +53,7 @@ export default {
       this.image = start;
       event.sender.send("getdata", false);
     });
-    document.body.onkeyup = e => {
+    document.body.onkeydown = e => {
       if (e && e.keyCode == 32) {
         this.onoff();
       }
@@ -79,7 +80,7 @@ export default {
   height: 100%;
   width: 2em;
 }
-#toolbar > div:nth-of-type(n+2) {
+#toolbar > div:nth-of-type(n + 2) {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,6 +91,7 @@ export default {
 #toolbar > div:nth-child(n + 2):hover {
   background-color: #747d8c;
 }
+
 #heatmap > div {
   position: relative;
   height: 0;

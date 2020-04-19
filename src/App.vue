@@ -20,10 +20,7 @@ export default {
     Menu
   },
   created(){
-    console.log(ipcRenderer);
     ipcRenderer.on("response",(event,str)=>{
-      console.log(event);
-      console.log(str);
       this.msg=str
     })
   },

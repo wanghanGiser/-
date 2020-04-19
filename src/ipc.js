@@ -7,6 +7,13 @@ const fs = require("fs");
 const path = require("path");
 const od = 24 * 60 * 60 * 1000;
 let interval;
+ipcMain.on('first', (event) => {
+  let fn = '2020-02-13';
+  let filepath = path.join(__static, "/data/" + fn + ".json");
+  event.sender.send("data", fs.readFileSync(filepath, {
+    encoding: 'UTF-8'
+  }), fn);
+})
 ipcMain.on("getdata", (event, flag) => {
   if (interval) clearInterval(interval);
   let start = (new Date("2020-02-13")).getTime();
