@@ -1,6 +1,7 @@
 <template>
   <div id="menu">
     <toolbar/>
+    疫情热力图
     <winclose/>
   </div>
 </template>

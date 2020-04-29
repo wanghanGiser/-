@@ -23,13 +23,14 @@ module.exports = function getData() {
     }
     start += od;
   }
+  console.log(reqs.length);
+  
   for (let i = 0; i < reqs.length; i++) {
     reqs[i].handle.then(res => {
       if (res.data.code == 200) {
         add(res.data.newslist).then(res=>{
           fs.writeFileSync(reqs[i].path, JSON.stringify(res));
         })
-        
       }
     })
   }

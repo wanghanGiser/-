@@ -18,7 +18,7 @@
     </div>
     <div @click="changeDate(1)" title="快捷键 +">➕</div>
     <div @click="changeDate(-1)" title="快捷键 -">➖</div>
-   
+    <div style="flex:1">疫情数据热力图</div>
   </div>
 </template>
 <script>
@@ -73,6 +73,7 @@ export default {
   display: flex;
   height: 100%;
   color: #f1f2f6;
+  width: calc(100vw - 7.5em);
 }
 #toolbar > div {
   user-select: none;
@@ -80,6 +81,7 @@ export default {
   height: 100%;
   width: 2em;
 }
+
 #toolbar > div:nth-of-type(n + 2) {
   display: flex;
   justify-content: center;
@@ -147,5 +149,8 @@ input[type="range"]::-webkit-slider-thumb {
   height: 20px;
   border-radius: 50%;
   background-color: azure;
+}
+#toolbar>div:last-child:hover{
+  background-color: inherit;
 }
 </style>
